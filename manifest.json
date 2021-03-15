@@ -13,13 +13,6 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "page_action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "48": "images/yns48.png",
-      "128": "images/yns128.png"
-    }
-  },
   "icons": {
     "48": "images/yns48.png",
     "128": "images/yns128.png"
