@@ -10,7 +10,7 @@
       "run_at": "document_end"
     }
   ],
-  "background": {
+  "background.service_worker": {
     "persistent": false,
     "scripts": ["background.js"]
   },
@@ -18,5 +18,5 @@
     "48": "images/yns48.png",
     "128": "images/yns128.png"
   },
-  "manifest_version": 2
+  "manifest_version": 3
 }
