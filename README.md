@@ -1,4 +1,4 @@
-# YT-NonStop
+# YT-Nonstop
 
 
 Autoclicker for Youtube's latest "feature" - Video paused. Continue watching?
