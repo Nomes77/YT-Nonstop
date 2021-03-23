@@ -156,7 +156,7 @@ var ynsInjection =
   } +
   ')();';
 
-console.log(`[YT-Nonstop v${chrome.runtime.getManifest().version}]`);
+console.log(`[YT-Nonstop ${chrome.runtime.getManifest().version}]`);
 
 var script = document.createElement('script');
 script.textContent = ynsInjection;
