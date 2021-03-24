@@ -7,7 +7,7 @@ Available for:
 
 - [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/youtube-nonstop/ddobgngkifgapahlheghhckckkcgpikf) 
 
-- Firefox (not yet, but coming soon)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/yt-nonstop/)
 
 #### In your Firefox, media keys may be disabled. To enable the functionality:
 
