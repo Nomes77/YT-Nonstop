@@ -31,10 +31,8 @@ var ynsInjection =
       return value < 10 ? '0' + value : value;
     }
 
-    function getTimestamp() {
-      let dt = new Date();
-      let time = asDoubleDigit(dt.getHours()) + ':' + asDoubleDigit(dt.getMinutes()) + ':' + asDoubleDigit(dt.getSeconds());
-      return time;
+    function getMilliseconds() {
+      return +new Date();
     }
 
     function isIdle() {
