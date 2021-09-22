@@ -21,7 +21,7 @@ Autoclicker for Youtube's latest "feature" - Video paused. Continue watching?
 
 ***
 #### In your Firefox, media keys may be disabled. To enable the functionality:
-1. Navigate to about:config from your address bar
+1. Navigate to [about:config](about:config) from your address bar
 2. If there is a warning message just confirm that you understand the risks
 3. Search for `media.hardwaremediakeys.enabled` and set to TRUE
 4. Search for `dom.media.mediasession.enabled` and set to TRUE
