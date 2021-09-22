@@ -21,7 +21,7 @@ Autoclicker for Youtube's latest "feature" - Video paused. Continue watching?
 
 ***
 #### In your Firefox, media keys may be disabled. To enable the functionality:
-1. Navigate to [about:config](about:config) from your address bar
+1. Navigate to `about:config` from your address bar
 2. If there is a warning message just confirm that you understand the risks
 3. Search for `media.hardwaremediakeys.enabled` and set to TRUE
 4. Search for `dom.media.mediasession.enabled` and set to TRUE
@@ -32,7 +32,7 @@ Autoclicker for Youtube's latest "feature" - Video paused. Continue watching?
 
 1. Clone or download this repository
    - If you download it, make sure to extract it first
-3. Open the Extension Management page by navigating to edge://extensions
+3. Open the Extension Management page by navigating to `edge://extensions`
    - The Extension Management page can also be opened by clicking on the Edge menu, hovering over More Tools then selecting Extensions.
 6. Enable Developer Mode by clicking the toggle switch next to Developer mode.
 7. Click the Load unpacked button and select the extension directory.
