@@ -20,11 +20,11 @@ var ynsInjection =
     let videoElement = null;
 
     function log(message) {
-      console.log(`${tag}[${getTimestamp()}] ${message}`);
+      console.log(`${tag}[${getMilliseconds()}] ${message}`);
     }
 
     function debug(message) {
-      console.debug(`${tag}[${getTimestamp()}] ${message}`);
+      console.debug(`${tag}[${getMilliseconds()}] ${message}`);
     }
 
     function asDoubleDigit(value) {
