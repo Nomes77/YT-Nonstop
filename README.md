@@ -37,3 +37,16 @@ Autoclicker for Youtube's latest "feature" - Video paused. Continue watching?
 6. Enable Developer Mode by clicking the toggle switch next to Developer mode.
 7. Click the Load unpacked button and select the extension directory.
 8. Ta-da! The extension has been successfully installed!
+
+***
+### Difference Edge and FireFox extension
+1. Delete the `background.js` file.
+2. Delete the following lines form the `manifest` file.
+   - ```  "permissions": ["declarativeContent"], ```
+   - 
+   ```
+   "background": {
+     "persistent": false,
+     "scripts": ["background.js"]
+   },
+   ```
