@@ -1,18 +1,24 @@
 {
   "name": "YT-Nonstop",
-  "version": "0.9.3",
-  "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube!",
-  "permissions": ["declarativeContent"],
-  "content_scripts": [
-    {
-      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*"],
-      "js": ["autoconfirm.js"],
-      "run_at": "document_end"
-    }
-  ],
+  "version": "1.0.0",
+  "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube and keep YouTube running nonstop!",
+  "permissions": [ "declarativeContent", "storage", "https://www.youtube.com/*", "https://m.youtube.com/*", "https://music.youtube.com/*" ],
   "background": {
     "persistent": false,
     "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*"],
+      "js": [ "autoconfirm.js", "script.js" ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+     "default_icon": {
+        "128": "images/ytn128.png"
+     },
+     "default_popup": "popup.html"
   },
   "icons": {
     "48": "images/ytn48.png",
