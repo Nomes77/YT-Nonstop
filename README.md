@@ -13,7 +13,7 @@
 # YT-Nonstop
 
 Autoclicker for Youtube's latest "feature" - Video paused. Continue watching?</br>
-Further keeps YouTube running and auto-skip to the next video on the list 🔥
+Furthermore it keeps YouTube running and auto-skip to the next video on the list 🔥
 
 <p align="center">
 <a href="https://addons.mozilla.org/en-US/firefox/addon/yt-nonstop/"><img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" alt="Get YT-Nonstop for Firefox"></a>
@@ -43,5 +43,5 @@ Further keeps YouTube running and auto-skip to the next video on the list 🔥
 ### Difference Edge and FireFox extension
 1. Delete the second half of the `background.js` file.
 2. Delete the following lines form the `manifest` file.
-   - ```  "permissions": ["declarativeContent"], ```
    - ```  "persistent": false, ``
+   - ```  "permissions": ["declarativeContent"], ```
