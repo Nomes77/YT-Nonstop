@@ -24,6 +24,9 @@ chrome.runtime.onInstalled.addListener(() => {
           }),
           new chrome.declarativeContent.PageStateMatcher({
             pageUrl: { hostEquals: 'music.youtube.com' }
+          }),
+          new chrome.declarativeContent.PageStateMatcher({
+            pageUrl: { hostEquals: 'm.youtube.com' }
           })
         ],
         actions: [new chrome.declarativeContent.ShowPageAction()]
