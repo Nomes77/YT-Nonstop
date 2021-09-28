@@ -29,7 +29,7 @@ let YTNonstop=function t(e){
 			return typeof t==="boolean"?n._debug=t:n._debug
 		}
 	};
-  const u={
+ 	const u={
 		player:()=>document.getElementById("movie_player"),
 		loop:{
 			button:()=>a()[1],
@@ -41,7 +41,7 @@ let YTNonstop=function t(e){
 	function a(){
 		return[...document.getElementsByClassName("header ytd-playlist-panel-renderer")[0].getElementsByClassName("style-scope yt-icon-button")].filter(t=>t.id=="button")
 	}
-  const l=()=>{
+	const l=()=>{
 		if(n.getIsAutoSkip()==true&&u.player().getPlayerState()===0){
 			u.player().setAutonav(true);
 			const t=u.player().getPlaylistIndex();
