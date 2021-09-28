@@ -43,5 +43,5 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 ### Difference Edge and FireFox extension
 1. Delete the second half of the `background.js` file.
 2. Delete the following lines form the `manifest` file.
-   - ```  "persistent": false, ``
+   - ```  "persistent": false, ```
    - ```  "permissions": ["declarativeContent"], ```
