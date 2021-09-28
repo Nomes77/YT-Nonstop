@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <style>
+      * {
+        font-family: "Segoe UI";
+        font-size: 14px;
+        text-align: center;
+        outline: none;
+      }
+      hr {
+        border: 0.5px solid gray;
+        background: gray;
+      }
+      main {
+        width: 200px;
+        ~width: 335px;
+        margin-left: -6px;
+        margin-right: -6px;
+      }
+      main > h1 {
+        color: #00B46E;
+        font-size: 34px;
+        font-family: "Edwardian Script ITC";
+        margin-bottom: 5px;
+        margin-top: 0px;
+      }
+      main > p1 {
+        font-size: 11px;
+        font-weight: bold;
+      }
+      main > settings > section > br1 {
+        font-size: 9px;
+        font-style: italic;
+      }
+      .switch {
+        position: relative;
+        display: block;
+        vertical-align: top;
+        width: 90%;
+        height: 30px;
+        padding: 3px;
+        margin: 3px;
+        background: linear-gradient(#E2E2E2, #E2E2E2 25px);
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .switch-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+      .switch-label {
+        position: relative;
+        display: block;
+        height: inherit;
+        font-size: 11px;
+        background: #FF4141;
+        border-radius: inherit;
+      }
+      .switch-label:before, .switch-label:after {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5em;
+        line-height: 1;
+        transition: inherit;
+      }
+      .switch-label:before {
+        content: attr(data-off);
+        right: 12px;
+        color: #FFFFFF;
+        text-shadow: 0 1px rgba(255, 255, 255, 0.6);
+      }
+      .switch-label:after {
+        content: attr(data-on);
+        left: 12px;
+        color: #FFFFFF;
+        text-shadow: 0 1px rgba(255, 255, 255, 0.6);
+        opacity: 0;
+      }
+      .switch-input:checked ~ .switch-label {
+        background: #00B46B;
+      }
+      .switch-input:checked ~ .switch-label:before {
+        opacity: 0;
+      }
+      .switch-input:checked ~ .switch-label:after {
+        opacity: 1;
+      }
+      .switch-handle {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 20px;
+        height: 20px;
+        border-radius: inherit;
+        border: 4px solid white;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+      }
+      .switch-handle:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -6px 0 0 -6px;
+        width: 12px;
+        height: 12px;
+        background: linear-gradient(lightgreen, green);
+        border-radius: 6px;
+      }
+      .switch-input:checked ~ .switch-handle:before {
+        background: linear-gradient(red 40%, darkred);
+      }
+      .switch-input:checked ~ .switch-handle {
+        left: calc(100% - 32px);
+        box-shadow: -1px 1px 5px rgba(0, 0, 0, 1);
+      }
+      .switch-label, .switch-handle {
+        transition: All 0.6s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>YT-Nonstop</h1>
+      <hr/>
+      <settings>
+        <section>
+            Auto-skip to next video:
+          </br>
+          <label class="switch">
+            <input id="autotube-skip-toggle" class="switch-input" type="checkbox" checked/>
+            <span class="switch-label" data-on="ON" data-off="OFF"></span> 
+            <span class="switch-handle"></span> 
+          </label>
+        </section>
+      </settings>
+      <hr/>
+      <a> Thank you for using YT-Nonstop
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_next">
+          <input type="hidden" name="cmd" value="_s-xclick" />
+          <input type="hidden" name="hosted_button_id" value="JBZ92VRAENDWW" />
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        </form>
+      </a>
+      <hr style="margin-bottom: 1px;"/>
+      <p1 span id="version">Version: </p1>
+    </main>
+  </body>
+  <script src="popup.js"></script>
+</html>
