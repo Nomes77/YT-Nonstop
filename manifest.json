@@ -2,19 +2,19 @@
   "name": "YT-Nonstop",
   "version": "1.0.0",
   "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube and keep YouTube running nonstop!",
-  "permissions": [ "declarativeContent", "storage", "https://www.youtube.com/*", "https://m.youtube.com/*", "https://music.youtube.com/*" ],
+  "permissions": [ "declarativeContent", "storage", "https://www.youtube.com/*", https://music.youtube.com/*", "https://m.youtube.com/*" ],
   "background": {
     "persistent": false,
     "scripts": ["background.js"]
   },
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*"],
+      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*","https://m.youtube.com/*"],
       "js": [ "autoconfirm.js", "script.js" ],
       "run_at": "document_end"
     }
   ],
-  "browser_action": {
+  "page_action": {
      "default_icon": {
         "128": "images/ytn128.png"
      },
