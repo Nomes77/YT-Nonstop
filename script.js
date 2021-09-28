@@ -99,7 +99,7 @@ let YTNonstop=function t(e){
 				}
 			}
 		};
-    const e={
+    		const e={
 			setInterval:setInterval(()=>{
 				if(window.location.href.indexOf("/watch")==-1)return;
 				try{
@@ -119,27 +119,23 @@ let YTNonstop=function t(e){
 				}
 			}
 		};
-		setInterval(()=>{
-			yt.util&&yt.util.activity&&yt.util.activity.setTimestamp();
-			e.setLoop()
-		},5e3);
 		return n
 	}
-  function f(){
-    return n.loadedAt
-  }
+	function f(){
+		return n.loadedAt
+	}
 	function p(){
-    return n.getIsAutoSkip()
-  }
+		return n.getIsAutoSkip()
+	}
 	function g(){
-    return n.getIsAutoLoop()
-  }
+ 		return n.getIsAutoLoop()
+ 	}
 	function b(t){
-    return n.setDebug(t)
-  }
+ 		return n.setDebug(t)
+  	}
 	function S(){
-    return u
-  }
+    		return u
+  	}
 	function t(){
 		this.loadedAt=f;
 		this.isAutoSkip=p;
