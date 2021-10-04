@@ -2,7 +2,7 @@
 [![Last commit](https://img.shields.io/github/last-commit/BPower0036/YT-Nonstop?label=Last%20commit&color=informational)](https://github.com/BPower0036/YT-Nonstop/commits/main)
 [![Issues](https://img.shields.io/github/issues/BPower0036/YT-Nonstop?label=Issues&color=red)](https://github.com/BPower0036/YT-Nonstop/issues)
 [![Issues](https://img.shields.io/github/issues-closed/BPower0036/YT-Nonstop?color=green&label=Issues)](https://github.com/BPower0036/YT-Nonstop/issues?q=is%3Aissue+is%3Aclosed)
-[![GitHub Release Date](https://img.shields.io/github/release-date/BPower0036/YT-Nonstop?label=Latest%20Release&color=white)](https://github.com/BPower0036/YT-Nonstop/releases/)
+[![GitHub Release Date](https://img.shields.io/github/release-date/BPower0036/YT-Nonstop?color=white&label=Latest%20Release)](https://github.com/BPower0036/YT-Nonstop/releases/)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?label=License&color=lightgrey)](https://github.com/BPower0036/YT-Nonstop/blob/main/LICENSE) </br>
 [![](https://img.shields.io/badge/dynamic/json?label=Edge&color=important&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fddobgngkifgapahlheghhckckkcgpikf)](https://microsoftedge.microsoft.com/addons/detail/ytnonstop/ddobgngkifgapahlheghhckckkcgpikf)
 [![](https://img.shields.io/badge/dynamic/json?label=Rating&color=yellow&suffix=/5&query=%24.averageRating&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fddobgngkifgapahlheghhckckkcgpikf)](https://microsoftedge.microsoft.com/addons/detail/ytnonstop/ddobgngkifgapahlheghhckckkcgpikf)
