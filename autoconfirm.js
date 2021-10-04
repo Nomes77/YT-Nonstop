@@ -53,6 +53,14 @@ var ynsInjection =
         debug('Paused due to [media key pause]');
         pauseVideo();
       });
+      navigator.mediaSession.yns_setActionHandler = navigator.mediaSession.setActionHandler;
+      navigator.mediaSession.setActionHandler = (action, fn) => {
+        if (action === 'pause') {
+          debug("Blocked attempt to override media key 'pause' action");
+          return;
+        }
+        navigator.mediaSession.yns_setActionHandler(action, fn);
+      };
     }
 
     function listenForMouse() {
