@@ -5,12 +5,12 @@
   "permissions": [ "declarativeContent", "storage", "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
   "background": {
     "persistent": false,
-    "scripts": [ "autoconfirm.js", "background.js" ]
+    "scripts": [ "background.js" ]
   },
   "content_scripts": [
     {
       "matches": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
-      "js": [ "script.js" ],
+      "js": [ "autoconfirm.js", "script.js" ],
       "run_at": "document_end"
     }
   ],
