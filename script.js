@@ -1,4 +1,11 @@
-setInterval(() =>  window._lact = Date.now(), 900000);
+function loadPageAccess() {
+    let pageAccess = document.createElement('script');
+    pageAccess.src = chrome.runtime.getURL('autoconfirm.js');
+    pageAccess.onload = function () {
+        this.remove();
+    };
+    (document.head || document.documentElement).appendChild(pageAccess);
+}
 
 function injectScript(t,e){
 	var o=document.getElementsByTagName(e)[0];
