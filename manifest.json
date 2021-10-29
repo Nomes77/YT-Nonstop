@@ -6,15 +6,21 @@
   "host_permissions": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*", "https://music.youtube.com/*","https://m.youtube.com/*"],
+      "matches": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
       "js": [ "script.js" ],
       "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "autoconfirm.js" ],
+      "matches": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ]
     }
   ],
   "action": {
     "default_icon": "images/ytn128.png",
     "default_popup": "popup.html",
-    "show_matches": ["https://www.youtube.com/*", "https://music.youtube.com/*","https://m.youtube.com/*"]
+    "show_matches": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ]
   },
   "icons": {
     "48": "images/ytn48.png",
