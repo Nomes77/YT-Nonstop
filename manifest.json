@@ -4,6 +4,9 @@
   "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube and keep YouTube running nonstop!",
   "permissions": [ "storage" ],
   "host_permissions": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
