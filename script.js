@@ -43,12 +43,12 @@ let YTNonstop=function t(e){
 		loop:{
 			button:()=>a()[1],
 			status:function(){
-				return u.loop.button()?JSON.parse(u.loop.button().getAttribute("aria-pressed")):undefined
+				return u.loop.button()?JSON.parse(u.loop.button().classList.contains("style-default-active")):undefined
 			}
 		}
 	};
 	function a(){
-		return[...document.getElementsByClassName("header ytd-playlist-panel-renderer")[0].getElementsByClassName("style-scope yt-icon-button")].filter(t=>t.id=="button")
+		return[...document.querySelectorAll("[id='playlist-action-menu'] [id='top-level-buttons']")].find(t=>t.childElementCount>0).children[t]
 	}
 	const l=()=>{
 		if(n.getIsAutoSkip()==true&&u.player().getPlayerState()===0){
@@ -114,7 +114,6 @@ let YTNonstop=function t(e){
 				try{
 					const n=new o(t.callback);
 					n.observe(t.getButton,t.config);
-					e.setLoop();
 					clearInterval(e.setInterval)
 				}
 				catch(t){
@@ -129,8 +128,11 @@ let YTNonstop=function t(e){
 			}
 		};
 		setInterval(()=>{
-			yt.util&&yt.util.activity&&yt.util.activity.setTimestamp();
-			e.setLoop()
+			try{
+				yt.util&&yt.util.activity&&yt.util.activity.setTimestamp();
+			catch(t){
+				if(n.getDebug()==true)console.log(t)
+			}
 		},5e3);
 		return n
 	}
@@ -154,14 +156,14 @@ let YTNonstop=function t(e){
 		this.isAutoSkip=p;
 		this.isAutoLoop=g;
 		this.setDebug=t=>b(t);
-		this.get_yt=S;d()
+		this.get_yt=S;
+		d()
 	}
 	const A=(t,e)=>{
 		switch(t){
 			case"autoSkip":n.setAutoSkip(e);
 			break;
 			case"autoLoop":n.setAutoLoop(e);
-			if(e!==u.loop.status())u.loop.button()&&u.loop.button().click();
 			break
 		}
 	};
@@ -185,3 +187,4 @@ window.onload=t=>{
 	}))
 };
 injectScript(YTNonstop,"html");
+	
