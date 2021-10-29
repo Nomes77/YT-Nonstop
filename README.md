@@ -39,3 +39,9 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 6. Enable Developer Mode by clicking the toggle switch next to Developer mode.
 7. Click the Load unpacked button and select the extension directory.
 8. Ta-da! The extension has been successfully installed!
+
+***
+### Difference Edge and FireFox extension
+1. Delete the second half of the `background.js` file.
+2. Delete the following lines form the `manifest` file.
+   - ```  "persistent": false, ```
