@@ -22,17 +22,11 @@ let YTNonstop=function t(e){
 		getIsAutoSkip:function(){
 			return n._autoSkip
 		},
-		getIsAutoLoop:function(){
-			return n._autoLoop
-		},
 		getDebug:function(){
 			return n._debug
 		},
 		setAutoSkip:function(t){
 			return n._autoSkip=t
-		},
-		setAutoLoop:function(t){
-			return n._autoLoop=t
 		},
 		setDebug:function(t){
 			return typeof t==="boolean"?n._debug=t:n._debug
@@ -40,12 +34,6 @@ let YTNonstop=function t(e){
 	};
 	const u={
 		player:()=>document.getElementById("movie_player"),
-		loop:{
-			button:()=>a()[1],
-			status:function(){
-				return u.loop.button()?JSON.parse(u.loop.button().classList.contains("style-default-active")):undefined
-			}
-		}
 	};
 	function a(){
 		return[...document.querySelectorAll("[id='playlist-action-menu'] [id='top-level-buttons']")].find(t=>t.childElementCount>0).children[t]
@@ -57,15 +45,6 @@ let YTNonstop=function t(e){
 			const e=u.player().getPlaylist();
 			if(e===null||e===undefined){
 				return u.player().nextVideo()
-			}
-			if(n.getIsAutoLoop()){
-				const o=()=>{
-					const n=Math.abs(Math.floor(Math.random()*e.length));
-					if(n==t)return o();
-					return n
-				};
-				u.player().playVideoAt(o());
-				return
 			}
 			else{
 				e.length-1==t?u.player().nextVideo():u.player().playVideoAt(t+1)
@@ -121,18 +100,9 @@ let YTNonstop=function t(e){
 					n.getDebug()&&console.log(t)
 				}
 			},1e3),
-			setLoop:function(){
-				if(u.loop.button()&&n.getIsAutoLoop()&&!u.loop.status()){
-					u.loop.button().click()
-				}
-			}
 		};
 		setInterval(()=>{
-			try{
-				yt.util&&yt.util.activity&&yt.util.activity.setTimestamp();
-			catch(t){
-				if(n.getDebug()==true)console.log(t)
-			}
+			yt.util&&yt.util.activity&&yt.util.activity.setTimestamp();
 		},5e3);
 		return n
 	}
@@ -141,9 +111,6 @@ let YTNonstop=function t(e){
 	}
 	function p(){
 		return n.getIsAutoSkip()
-	}
-	function g(){
-		return n.getIsAutoLoop()
 	}
 	function b(t){
 		return n.setDebug(t)
@@ -154,7 +121,6 @@ let YTNonstop=function t(e){
 	function t(){
 		this.loadedAt=f;
 		this.isAutoSkip=p;
-		this.isAutoLoop=g;
 		this.setDebug=t=>b(t);
 		this.get_yt=S;
 		d()
@@ -162,8 +128,6 @@ let YTNonstop=function t(e){
 	const A=(t,e)=>{
 		switch(t){
 			case"autoSkip":n.setAutoSkip(e);
-			break;
-			case"autoLoop":n.setAutoLoop(e);
 			break
 		}
 	};
@@ -187,4 +151,3 @@ window.onload=t=>{
 	}))
 };
 injectScript(YTNonstop,"html");
-	
