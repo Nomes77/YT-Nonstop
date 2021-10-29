@@ -1,3 +1,5 @@
+setInterval(() =>  window._lact = Date.now(), 900000);
+
 function injectScript(t,e){
 	var o=document.getElementsByTagName(e)[0];
 	var n=document.createElement("script");
