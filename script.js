@@ -24,7 +24,6 @@ let YTNonstop=function t(e){
 	const n={
 		loadedAt:Date.now(),
 		_autoSkip:null,
-		_autoLoop:null,
     		_debug:false,
 		getIsAutoSkip:function(){
 			return n._autoSkip
