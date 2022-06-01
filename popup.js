@@ -39,3 +39,4 @@ function setAutoTubeListeners(t){
 function setAutoSkip(t){
   return document.getElementById("autotube-skip-toggle").toggleAttribute("checked",t)
 }
+}
