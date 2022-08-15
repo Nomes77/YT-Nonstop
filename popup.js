@@ -1,27 +1,39 @@
 window.onload=()=>{
-document.getElementById("autotube-skip-toggle").addEventListener(
-  "click",(
-    function(t){
-      setAutoTubeListeners("autoSkip")
-    }
-  )
-);
-setSettings([{key:"autoSkip",cb:setAutoSkip}]);
-function setSettings(t){
-  chrome.storage.sync.get(null,(function(e){
-    const o={};
-    t.forEach(({key:t,cb:n})=>{
-      if(e===undefined||e[t]===undefined||e[t]===null){
-        o.key=n(true)
+  document.getElementById("autotube-skip-toggle").addEventListener(
+    "click",(
+      function(t){
+        setAutoTubeListeners("autoSkip")
       }
-      else if(!e[t]){n(false)}
-      else{n(true)}
-  });
-  Object.keys(o).length>0&&chrome.storage.sync.set(o,(function(){}))
-  }))
-}
-function setAutoTubeListeners(t){
-  const e={autoSkip:document.getElementById("autotube-skip-toggle").checked}[t];
+    )
+  );
+  setSettings([{
+    key:"autoSkip",
+    cb:setAutoSkip
+  }]);
+  function setSettings(t){
+    chrome.storage.sync.get(null,(function(e){
+      const o={};
+      t.forEach(({
+        key:t,
+        cb:n
+      })=>{
+        if(e===undefined||e[t]===undefined||e[t]===null){
+          o.key=n(true)
+        }
+        else if(!e[t]){
+          n(false)
+        }
+        else{
+          n(true)
+        }
+      });
+      Object.keys(o).length>0&&chrome.storage.sync.set(o,(function(){}))
+    }))
+  }
+  function setAutoTubeListeners(t){
+    const e={
+      autoSkip:document.getElementById("autotube-skip-toggle").checked
+    }[t];
     chrome.tabs.query({
       url:[
         "https://www.youtube.com/*",
@@ -35,8 +47,8 @@ function setAutoTubeListeners(t){
       }
     });
     chrome.storage.sync.set({[t]:e})
-}
-function setAutoSkip(t){
-  return document.getElementById("autotube-skip-toggle").toggleAttribute("checked",t)
-}
+  }
+  function setAutoSkip(t){
+    return document.getElementById("autotube-skip-toggle").toggleAttribute("checked",t)
+  }
 }

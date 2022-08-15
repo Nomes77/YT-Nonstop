@@ -1,1 +1,1 @@
-setInterval(() =>  window._lact = Date.now(), 900000);
+setInterval(() => window._lact = Date.now(), 600000);

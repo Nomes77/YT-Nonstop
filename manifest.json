@@ -7,9 +7,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_security_policy": {
-    "script-src": "'unsafe-inline'"
-  },
   "content_scripts": [
     {
       "matches": [ "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
