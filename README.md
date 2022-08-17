@@ -22,6 +22,13 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 </p>
 
 ***
+#### IMPORTANT! Manifest V3 in Firefox:
+1. Navigate to `about:config` from your address bar
+2. If there is a warning message just confirm that you understand the risks
+3. Search for `extensions.manifestV3.enabled` and set to TRUE
+4. Search for `extensions.backgroundServiceWorker.enabled` and set to TRUE
+5. Restart your browser
+
 #### In your Firefox, media keys may be disabled. To enable the functionality:
 1. Navigate to `about:config` from your address bar
 2. If there is a warning message just confirm that you understand the risks
