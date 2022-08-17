@@ -53,4 +53,4 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 2. Delete the following lines form the `manifest` file.
    - ```  "permissions": ["declarativeContent"], ```
 3. Change the following from the `manifest` file.
-   - ```  "action" ``` to ```"page-action"```
+   - ```  "action" ``` to ```"page_action"```
