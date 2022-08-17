@@ -1,5 +1,7 @@
-[![Commit rate](https://img.shields.io/github/commit-activity/m/BPower0036/YT-Nonstop?label=Commits&color=succes)](https://github.com/BPower0036/YT-Nonstop/commits/)
-[![Last commit](https://img.shields.io/github/last-commit/BPower0036/YT-Nonstop?label=Last%20commit&color=informational)](https://github.com/BPower0036/YT-Nonstop/commits/main)
+[![Commit rate `main`](https://img.shields.io/github/commit-activity/m/BPower0036/YT-Nonstop?label=Commits%20%60main%60&color=succes)](https://github.com/BPower0036/YT-Nonstop/commits/)
+[![Last commit `main`](https://img.shields.io/github/last-commit/BPower0036/YT-Nonstop?label=Last%20commit%20%60main%60&color=informational)](https://github.com/BPower0036/YT-Nonstop/commits/main)
+[![Commit rate `manifest_3`](https://img.shields.io/github/commit-activity/m/BPower0036/YT-Nonstop/manifest_3?label=Commits%20%60manifest_3%60&color=succes)](https://github.com/BPower0036/YT-Nonstop/commits/manifest_3)
+[![Last commit `manifest_3`](https://img.shields.io/github/last-commit/BPower0036/YT-Nonstop/manifest_3?label=Last%20commit%20%60manifest_3%60&color=informational)](https://github.com/BPower0036/YT-Nonstop/commits/manifest_3) </br>
 [![Issues](https://img.shields.io/github/issues/BPower0036/YT-Nonstop?label=Issues&color=red)](https://github.com/BPower0036/YT-Nonstop/issues)
 [![Issues](https://img.shields.io/github/issues-closed/BPower0036/YT-Nonstop?color=green&label=Issues)](https://github.com/BPower0036/YT-Nonstop/issues?q=is%3Aissue+is%3Aclosed)
 [![GitHub Release Date](https://img.shields.io/github/release-date/BPower0036/YT-Nonstop?color=white&label=Latest%20Release)](https://github.com/BPower0036/YT-Nonstop/releases/)
