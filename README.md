@@ -49,5 +49,5 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 
 ***
 ### Difference Edge and FireFox extension
-1. Delete the following lines form the `manifest` file.
-   - ```  "persistent": false, ```
+1. Change the following from the `manifest` file.
+   - ```  "action" ``` to ```"page-action"```
