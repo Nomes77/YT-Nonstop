@@ -22,10 +22,5 @@
     "48": "images/ytn48.png",
     "128": "images/ytn128.png"
   },
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "@YTNonstop"
-    }
-  },
   "manifest_version": 2
 }
