@@ -1,5 +1,6 @@
 "use strict";
-chrome.runtime.onInstalled.addListener((function(){
+
+function Reload() {
   chrome.tabs.query({
     url:[
       "https://www.youtube.com/*",
@@ -9,12 +10,12 @@ chrome.runtime.onInstalled.addListener((function(){
   },
   t => {
     for(let o of t){
-      console.log(o);
       chrome.tabs.reload(o.id)
     }
   })
-}));
-chrome.runtime.onInstalled.addListener(() => {
+}
+
+function ShowPopup() {
   chrome.action.disable();
   chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
     chrome.declarativeContent.onPageChanged.addRules([
@@ -28,4 +29,12 @@ chrome.runtime.onInstalled.addListener(() => {
       }
     ]);
   });
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+  Reload();
+  ShowPopup();
+});
+chrome.runtime.onStartup.addListener(() => {
+  ShowPopup();
 });
