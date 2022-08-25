@@ -81,9 +81,6 @@ let YTNonstop=function t(e){
 				}
 			},1e3),
 		};
-		setInterval(()=>{
-			yt.util&&yt.util.activity&&yt.util.activity.setTimestamp();
-		},5e3);
 		return n
 	}
 	function p(){
