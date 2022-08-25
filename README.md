@@ -41,16 +41,14 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 
 1. Clone or download this repository
    - If you download it, make sure to extract it first
-3. Open the Extension Management page by navigating to `edge://extensions`
-   - The Extension Management page can also be opened by clicking on the Edge menu, hovering over More Tools then selecting Extensions.
-6. Enable Developer Mode by clicking the toggle switch next to Developer mode.
-7. Click the Load unpacked button and select the extension directory.
+3. Open the `Extension Management` page by navigating to `edge://extensions`
+   - The `Extension Management` page can also be opened by clicking on the Edge menu, hovering over `More Tools` then selecting `Extensions`.
+6. Enable `Developer Mode` by clicking the toggle switch next to it.
+7. Click the `Load unpacked extension` button and select the extension directory.
 8. Ta-da! The extension has been successfully installed!
 
 ***
 ### Difference Edge and FireFox extension
-1. Delete the second half of the `background.js` file.
-2. Delete the following lines form the `manifest` file.
-   - ```  "permissions": ["declarativeContent"], ```
-3. Change the following from the `manifest` file.
-   - ```  "action" ``` to ```"page_action"```
+1. Remove the function `ShowPopup()` in the `background.js` file.
+2. Delete `"declarativeContent"` as `"permissions"` from the `manifest` file.
+3. Change `"action"` to `"page_action"` in the `manifest` file.
