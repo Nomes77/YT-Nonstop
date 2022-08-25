@@ -13,7 +13,6 @@ function injectScript(t,e){
 let YTNonstop=function t(e){
 	const o=window.MutationObserver||window.WebKitMutationObserver;
 	const n={
-		loadedAt:Date.now(),
 		_autoSkip:null,
 		getIsAutoSkip:function(){
 			return n._autoSkip
@@ -25,9 +24,6 @@ let YTNonstop=function t(e){
 	const u={
 		player:()=>document.getElementById("movie_player"),
 	};
-	function a(){
-		return[...document.querySelectorAll("[id='playlist-action-menu'] [id='top-level-buttons']")].find(t=>t.childElementCount>0).children[t]
-	}
 	const l=()=>{
 		if(n.getIsAutoSkip()==true&&u.player().getPlayerState()===0){
 			u.player().setAutonav(true);
@@ -44,8 +40,6 @@ let YTNonstop=function t(e){
 			u.player().setAutonav(false)
 		}
 	};
-	const r=()=>window.location.reload();
-	const s=()=>!!document.fullscreenElement;
 	const c=t=>{
 		if(u.player().getPlayerState()===2){
 			t.click();
@@ -92,9 +86,6 @@ let YTNonstop=function t(e){
 		},5e3);
 		return n
 	}
-	function f(){
-		return n.loadedAt
-	}
 	function p(){
 		return n.getIsAutoSkip()
 	}
@@ -102,7 +93,6 @@ let YTNonstop=function t(e){
 		return u
 	}
 	function t(){
-		this.loadedAt=f;
 		this.isAutoSkip=p;
 		this.get_yt=S;
 		d()
