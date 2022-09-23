@@ -1,4 +1,4 @@
-var ytnsInjection =
+var ytnonstopInjection =
   '(' +
   function () {
     const YTMusic = window.location.hostname === 'music.youtube.com';
@@ -30,12 +30,12 @@ var ytnsInjection =
       navigator.mediaSession.setActionHandler('pause', () => {
         pauseVideo();
       });
-      navigator.mediaSession.ytns_setActionHandler = navigator.mediaSession.setActionHandler;
+      navigator.mediaSession.ytnonstop_setActionHandler = navigator.mediaSession.setActionHandler;
       navigator.mediaSession.setActionHandler = (action, fn) => {
         if (action === 'pause') {
           return;
         }
-        navigator.mediaSession.ytns_setActionHandler(action, fn);
+        navigator.mediaSession.ytnonstop_setActionHandler(action, fn);
       };
     }
 
@@ -87,11 +87,11 @@ var ytnsInjection =
     }
 
     function overrideVideoPause() {
-      if (videoElement?.ytns_pause !== undefined) return;
+      if (videoElement?.ytnonstop_pause !== undefined) return;
       if (document.querySelector('video') === null) return;
       videoElement = document.querySelector('video');
       listenForMediaKeys();
-      videoElement.ytns_pause = videoElement.pause;
+      videoElement.ytnonstop_pause = videoElement.pause;
       videoElement.pause = () => {
         if (!isIdle()) {
           pauseVideo();
@@ -111,7 +111,7 @@ var ytnsInjection =
     }
 
     function pauseVideo() {
-      videoElement?.ytns_pause();
+      videoElement?.ytnonstop_pause();
       pauseRequested = false;
       setPauseRequestedTimeout(true);
     }
@@ -125,6 +125,6 @@ var ytnsInjection =
   ')();';
 
 var script = document.createElement('script');
-script.textContent = ytnsInjection;
+script.textContent = ytnonstopInjection;
 (document.head || document.documentElement).appendChild(script);
 script.remove();
