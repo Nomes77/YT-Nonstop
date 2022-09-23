@@ -1,19 +1,12 @@
 "use strict";
 
-function Reload() {
-  chrome.tabs.query({
-    url:[
-      "https://www.youtube.com/*",
-      "https://music.youtube.com/*",
-      "https://m.youtube.com/*"
-    ]
-  },
-  t => {
-    for(let o of t){
-      chrome.tabs.reload(o.id)
-    }
-  })
-}
+chrome.runtime.onStartup.addListener(() => {
+  ShowPopup();
+});
+chrome.runtime.onInstalled.addListener(() => {
+  Reload();
+  ShowPopup();
+});
 
 function ShowPopup() {
   chrome.action.disable();
@@ -29,12 +22,18 @@ function ShowPopup() {
       }
     ]);
   });
-}
+};
 
-chrome.runtime.onInstalled.addListener(() => {
-  Reload();
-  ShowPopup();
-});
-chrome.runtime.onStartup.addListener(() => {
-  ShowPopup();
-});
+function Reload() {
+  chrome.tabs.query({
+    url: [
+      "https://www.youtube.com/*",
+      "https://music.youtube.com/*",
+      "https://m.youtube.com/*"
+    ]
+  }, (tabs) => {
+    for(let tab of tabs) {
+      chrome.tabs.reload(tab.id)
+    }
+  });
+};
