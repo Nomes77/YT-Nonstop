@@ -1,16 +1,19 @@
 "use strict";
-chrome.runtime.onInstalled.addListener((function(){
+
+chrome.runtime.onInstalled.addListener(() => {
+  Reload();
+});
+
+function Reload() {
   chrome.tabs.query({
-    url:[
+    url: [
       "https://www.youtube.com/*",
       "https://music.youtube.com/*",
       "https://m.youtube.com/*"
     ]
-  },
-  t => {
-    for(let o of t){
-      console.log(o);
-      chrome.tabs.reload(o.id)
+  }, (tabs) => {
+    for(let tab of tabs) {
+      chrome.tabs.reload(tab.id)
     }
-  })
-}));
+  });
+};
