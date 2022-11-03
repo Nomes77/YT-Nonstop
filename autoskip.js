@@ -34,8 +34,8 @@ let YTNonstop = (function YTNonstop(options) {
 
             const playList = player().getPlaylist();
             const currentIndex = player().getPlaylistIndex();
-            const loop = document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer #button[aria-label] > yt-icon path[d="M20,14h2v5L5.84,19.02l1.77,1.77l-1.41,1.41L1.99,18l4.21-4.21l1.41,1.41l-1.82,1.82L20,17V14z M4,7l14.21-0.02l-1.82,1.82 l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]');
-            const shuffle = document.querySelector('#playlist-action-menu ytd-toggle-button-renderer #button[aria-label][aria-pressed="true"]');
+            const loop = document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer button[aria-label] path[d="M20,14h2v5L5.84,19.02l1.77,1.77l-1.41,1.41L1.99,18l4.21-4.21l1.41,1.41l-1.82,1.82L20,17V14z M4,7l14.21-0.02l-1.82,1.82 l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]');
+            const shuffle = document.querySelector('#playlist-action-menu ytd-toggle-button-renderer button[aria-label][aria-pressed="true"]');
 
             if (playList === null || playList === undefined) {
                 return player().nextVideo();
