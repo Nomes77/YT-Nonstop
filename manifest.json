@@ -1,6 +1,6 @@
 {
   "name": "YT-Nonstop",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube and keep YouTube running nonstop!",
   "permissions": [ "storage", "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
   "background": {
