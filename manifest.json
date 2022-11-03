@@ -1,7 +1,7 @@
 {
   "name": "YT-Nonstop",
   "version": "1.1.5",
-  "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube and keep YouTube running nonstop!",
+  "description": "Deletes the annoying \"Video paused. Continue watching?\" confirmation on YouTube and keeps YouTube running nonstop without autoplay message!",
   "permissions": [ "storage", "https://www.youtube.com/*", "https://music.youtube.com/*", "https://m.youtube.com/*" ],
   "background": {
     "scripts": [ "background.js" ]
