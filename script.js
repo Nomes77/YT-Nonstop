@@ -81,17 +81,13 @@ let YTNonstop = (function YTNonstop(options) {
                 const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
                     || document.querySelector('#automix[role="button"][aria-pressed="false"]');
 
-                if (autotube.getIsAutoSkip() == true && autonav_on) {
-                    return;
-                } else
-                if (autotube.getIsAutoSkip() == false && autonav_off) {
-                    return;
-                } else
                 if (autotube.getIsAutoSkip() == true && autonav_off) {
                     autonav_off.click();
                 } else
                 if (autotube.getIsAutoSkip() == false && autonav_on) {
                     autonav_on.click();
+                } else {
+                    return;
                 }
             }
         }
