@@ -86,11 +86,14 @@ let YTNonstop = (function YTNonstop(options) {
                 } else
                 if (autotube.getIsAutoSkip() == false && autonav_on) {
                     autonav_on.click();
+                } else {
+                    return;
                 }
             }
         }
 
         setInterval(() => {
+            if (window.location.href.indexOf("/watch") == -1 ) return;
             loadSettings.setButton();
         }, 5000);
 
