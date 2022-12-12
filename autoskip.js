@@ -86,8 +86,6 @@ let YTNonstop = (function YTNonstop(options) {
                 } else
                 if (autotube.getIsAutoSkip() == false && autonav_on) {
                     autonav_on.click();
-                } else {
-                    return;
                 }
             }
         }
