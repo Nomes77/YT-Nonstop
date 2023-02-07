@@ -76,17 +76,9 @@ let YTNonstop = (function YTNonstop(options) {
             }, 1000),
 
             setButton: function() {
-                const autonav_on = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
-                    || document.querySelector('#automix[role="button"][aria-pressed="true"]');
-                const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
-                    || document.querySelector('#automix[role="button"][aria-pressed="false"]');
-
-                if (autotube.getIsAutoSkip() == true && autonav_off) {
-                    autonav_off.click();
-                } else
-                if (autotube.getIsAutoSkip() == false && autonav_on) {
-                    autonav_on.click();
-                }
+                const autonav = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button')
+                    || document.querySelector('#automix[role="button"]');
+                autonav.remove();
             }
         }
 
