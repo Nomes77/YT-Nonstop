@@ -90,11 +90,6 @@ let YTNonstop = (function YTNonstop(options) {
             }
         }
 
-        setInterval(() => {
-            if (window.location.href.indexOf("/watch") == -1 ) return;
-            loadSettings.setButton();
-        }, 5000);
-
         return autotube;
     };
 
