@@ -6,6 +6,7 @@ const YTMusic = window.location.hostname === 'music.youtube.com';
 const appName = YTMusic ? 'ytmusic-app' : 'ytd-app';
 const popupEventNodename = YTMusic ? 'YTMUSIC-YOU-THERE-RENDERER' : 'YT-CONFIRM-DIALOG-RENDERER';
 const popupContainer = YTMusic ? 'ytmusic-popup-container' : 'ytd-popup-container';
+let videoElement = document.querySelector('video');
 
 const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 let appObserver = null;
