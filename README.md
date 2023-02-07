@@ -24,14 +24,6 @@ Furthermore it keeps YouTube running and auto-skip to the next video on the list
 </p>
 
 ***
-#### In your Firefox, media keys may be disabled. To enable the functionality:
-1. Navigate to `about:config` from your address bar
-2. If there is a warning message just confirm that you understand the risks
-3. Search for `media.hardwaremediakeys.enabled` and set to TRUE
-4. Search for `dom.media.mediasession.enabled` and set to TRUE
-5. Restart your browser
-
-***
 #### If you want to load the extension by yourself in your browser without installing it from store or Microsoft suddenly decides to take action against it, follow the instructions below:
 
 1. Clone or download this repository
