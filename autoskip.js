@@ -34,7 +34,8 @@ let YTNonstop = (function YTNonstop(options) {
 
             const playList = player().getPlaylist();
             const currentIndex = player().getPlaylistIndex();
-            const loop = document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer button[aria-label] path[d="M20,14h2v5L5.84,19.02l1.77,1.77l-1.41,1.41L1.99,18l4.21-4.21l1.41,1.41l-1.82,1.82L20,17V14z M4,7l14.21-0.02l-1.82,1.82 l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]');
+            const loop = document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer button[aria-label] path[d="M20,14h2v5L5.84,19.02l1.77,1.77l-1.41,1.41L1.99,18l4.21-4.21l1.41,1.41l-1.82,1.82L20,17V14z M4,7l14.21-0.02l-1.82,1.82 l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]')
+                      || document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer button[aria-label] path[d="M13,15h-1.37v-4.52l-1.3,0.38v-1L12.83,9H13V15z M20,17L5.79,17.02l1.82-1.82l-1.41-1.41L1.99,18l4.21,4.21l1.41-1.41 l-1.77-1.77L22,19v-5h-2V17z M4,7l14.21-0.02l-1.82,1.82l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]');
             const shuffle = document.querySelector('#playlist-action-menu ytd-toggle-button-renderer button[aria-label][aria-pressed="true"]');
 
             if (playList === null || playList === undefined) {
@@ -76,24 +77,11 @@ let YTNonstop = (function YTNonstop(options) {
             }, 1000),
 
             setButton: function() {
-                const autonav_on = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
-                    || document.querySelector('#automix[role="button"][aria-pressed="true"]');
-                const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
-                    || document.querySelector('#automix[role="button"][aria-pressed="false"]');
-
-                if (autotube.getIsAutoSkip() == true && autonav_off) {
-                    autonav_off.click();
-                } else
-                if (autotube.getIsAutoSkip() == false && autonav_on) {
-                    autonav_on.click();
-                }
+                const autonav = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button')
+                             || document.querySelector('#automix[role="button"]');
+                autonav.remove();
             }
         }
-
-        setInterval(() => {
-            if (window.location.href.indexOf("/watch") == -1 ) return;
-            loadSettings.setButton();
-        }, 5000);
 
         return autotube;
     };
