@@ -27,6 +27,7 @@ function listenForPopupEvent() {
       document.querySelector(popupContainer).handleClosePopupAction_();
       videoElement.play();
     }
+    lastInteractionTime = new Date().getTime();
   });
 }
 
