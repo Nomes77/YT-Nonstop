@@ -62,6 +62,15 @@ let YTNonstop = (function YTNonstop(options) {
             }
         }
 
+        const autoplay_button = {
+            getButton: window.document.querySelector('#movie_player .ytp-progress-bar') 
+                    || window.document.querySelector('#movie_player .ytmusic-player-bar#progress-bar'),
+            config: { attributes: true },
+            callback: (mutationsList, observer) => {
+                loadSettings.setButton();
+            }
+        }
+
         const loadSettings = {
             setInterval: setInterval(() => {
                 if (window.location.href.indexOf("/watch") == -1 ) return;
@@ -71,15 +80,24 @@ let YTNonstop = (function YTNonstop(options) {
                 play_button_observer.observe(play_button.getButton, play_button.config);
 
                 // set autonav button
-                loadSettings.setButton();
+                const autoplay_button_observer = new MutationObserver(autoplay_button.callback);
+                autoplay_button_observer.observe(autoplay_button.getButton, autoplay_button.config);
 
                 clearInterval(loadSettings.setInterval);
             }, 1000),
 
             setButton: function() {
-                const autonav = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button')
-                             || document.querySelector('#automix[role="button"]');
-                autonav.remove();
+                const autonav_on = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
+                    || document.querySelector('#automix[role="button"][aria-pressed="true"]');
+                const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
+                    || document.querySelector('#automix[role="button"][aria-pressed="false"]');
+
+                if (autotube.getIsAutoSkip() == true && autonav_off) {
+                    autonav_off.click();
+                } else
+                if (autotube.getIsAutoSkip() == false && autonav_on) {
+                    autonav_on.click();
+                }
             }
         }
 
