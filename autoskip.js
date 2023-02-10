@@ -29,76 +29,86 @@ let YTNonstop = (function YTNonstop(options) {
     // .getPlayerState(): -1 = unstarted, 0 = ended, 1 = playing, 2 = paused, 3 = buffering, 5 = video cued
     // if video ended ---> skip to next video 
     const skip = () => {
-        if (autotube.getIsAutoSkip() == true && player().getPlayerState() === 0) {
-            player().setAutonav(true);
+        if (player().getPlayerState() === 0 && !YTMusic) {
+            const overlay = document.querySelector('.ytp-autonav-endscreen-countdown-overlay[style="display: none;"]');
+            const play = document.querySelector('.ytp-autonav-endscreen-upnext-play-button');
+            const cancel = document.querySelector('.ytp-autonav-endscreen-upnext-cancel-button');
 
-            const playList = player().getPlaylist();
-            const currentIndex = player().getPlaylistIndex();
-            const loop = document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer button[aria-label] path[d="M20,14h2v5L5.84,19.02l1.77,1.77l-1.41,1.41L1.99,18l4.21-4.21l1.41,1.41l-1.82,1.82L20,17V14z M4,7l14.21-0.02l-1.82,1.82 l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]')
-                      || document.querySelector('#playlist-action-menu ytd-playlist-loop-button-renderer button[aria-label] path[d="M13,15h-1.37v-4.52l-1.3,0.38v-1L12.83,9H13V15z M20,17L5.79,17.02l1.82-1.82l-1.41-1.41L1.99,18l4.21,4.21l1.41-1.41 l-1.77-1.77L22,19v-5h-2V17z M4,7l14.21-0.02l-1.82,1.82l1.41,1.41L22.01,6l-4.21-4.21l-1.41,1.41l1.77,1.77L2,5v6h2V7z"]');
-            const shuffle = document.querySelector('#playlist-action-menu ytd-toggle-button-renderer button[aria-label][aria-pressed="true"]');
-
-            if (playList === null || playList === undefined) {
-                return player().nextVideo();
-            } else
-            if (loop || shuffle) {
+            if (overlay) {
+                log('Return skip; autonav-endscreen is not visible.');
                 return;
-            } else {
-                playList.length - 1 == currentIndex 
-                    ? player().nextVideo() 
-                    : player().playVideoAt(currentIndex + 1); 
+            } else
+            if (autotube.getIsAutoSkip() == true) {
+                play.click();
+                log('Skipped to next video');
+            } else
+            if (autotube.getIsAutoSkip() == false) {
+                // player().setAutonav(false);
+                cancel.click();
+                document.querySelector('.ytp-autonav-endscreen-countdown-overlay').remove();
+                log('Canceled next video');
             }
-        } else {
-            player().setAutonav(false);
         }
+    }
+
+    const autonav_button = () => {
+        const autonav_on = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
+                        || document.querySelector('#automix[role="button"][aria-pressed="true"]');
+        const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
+                         || document.querySelector('#automix[role="button"][aria-pressed="false"]');
+
+        if (autotube.getIsAutoSkip() == true && autonav_off) {
+            autonav_off.click();
+            log('Enabled autoplay/autonav');
+        } else
+        if (autotube.getIsAutoSkip() == false && autonav_on) {
+            autonav_on.click();
+            log('Disabled autoplay/autonav');
+        }
+    }
+
+    const autonav_button_style = () => {
+        const autonav = document.querySelector('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]')
+                     || document.querySelector('ytmusic-app .autoplay.ytmusic-tab-renderer');
+
+        autonav.setAttribute("style", "height:0px; width:0px; opacity:0");
+        log('Hide autoplay/autonav, since the button is overriden');
     }
 
     function run() {
         const play_button = {
-            getButton: window.document.querySelector('.ytp-play-button.ytp-button') || window.document.getElementById('play-pause-button'),
+            getButton: window.document.querySelector('.ytp-play-button.ytp-button')
+                    || window.document.getElementById('play-pause-button'),
             config: { attributes: true, childList: true, subtree: true },
             callback: (mutationsList, observer) => {
                 skip();
             }
         }
 
-        const autoplay_button = {
-            getButton: window.document.querySelector('#movie_player .ytp-progress-bar') 
-                    || window.document.querySelector('#movie_player .ytmusic-player-bar#progress-bar'),
-            config: { attributes: true },
-            callback: (mutationsList, observer) => {
-                loadSettings.setButton();
-            }
-        }
-
         const loadSettings = {
-            setInterval: setInterval(() => {
+            setSettings: setInterval(() => {
                 if (window.location.href.indexOf("/watch") == -1 ) return;
 
                 // set play button observer
-                const play_button_observer = new MutationObserver(play_button.callback);
-                play_button_observer.observe(play_button.getButton, play_button.config);
+                try {
+                    const play_button_observer = new MutationObserver(play_button.callback);
+                    play_button_observer.observe(play_button.getButton, play_button.config);
+                } catch(e) {
+                    log('Play button does not exist; reload page');
+                    window.location.reload();
+                }
 
                 // set autonav button
-                const autoplay_button_observer = new MutationObserver(autoplay_button.callback);
-                autoplay_button_observer.observe(autoplay_button.getButton, autoplay_button.config);
+                autonav_button();
+                autonav_button_style();
 
-                clearInterval(loadSettings.setInterval);
+                clearInterval(loadSettings.setSettings);
             }, 1000),
 
-            setButton: function() {
-                const autonav_on = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
-                    || document.querySelector('#automix[role="button"][aria-pressed="true"]');
-                const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
-                    || document.querySelector('#automix[role="button"][aria-pressed="false"]');
-
-                if (autotube.getIsAutoSkip() == true && autonav_off) {
-                    autonav_off.click();
-                } else
-                if (autotube.getIsAutoSkip() == false && autonav_on) {
-                    autonav_on.click();
-                }
-            }
+            setAutonavButton: setInterval(() => {
+                if (window.location.href.indexOf("/watch") == -1 ) return;
+                autonav_button();
+            }, 5000)
         }
 
         return autotube;
