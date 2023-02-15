@@ -24,38 +24,61 @@ let YTNonstop = (function YTNonstop(options) {
          // setters
          setAutoSkip: function(value) { return autotube._autoSkip = value},
     }
-    const player = () => document.getElementById('movie_player');
+    const YTMusic = window.location.hostname === 'music.youtube.com';
+    const videoPlayer = document.getElementById('movie_player');
+
+    function getTimestamp() {
+        return new Date().toLocaleTimeString();
+    }
+    function log(message) {
+        console.log(`[YT-Nonstop | ${getTimestamp()}] ${message}`);
+    }
 
     // .getPlayerState(): -1 = unstarted, 0 = ended, 1 = playing, 2 = paused, 3 = buffering, 5 = video cued
-    // if video ended ---> skip to next video 
-    const skip = () => {
-        if (player().getPlayerState() === 0 && !YTMusic) {
-            const overlay = document.querySelector('.ytp-autonav-endscreen-countdown-overlay[style="display: none;"]');
-            const play = document.querySelector('.ytp-autonav-endscreen-upnext-play-button');
-            const cancel = document.querySelector('.ytp-autonav-endscreen-upnext-cancel-button');
+    // if video paused ---> play video
+    const play = () => {
+        const popupEventNodename = YTMusic ? document.querySelector('YTMUSIC-YOU-THERE-RENDERER') :
+                                             document.querySelector('YT-CONFIRM-DIALOG-RENDERER');
+        const popupContainer = YTMusic ? document.getElementsByTagName('ytmusic-popup-container')[0] :
+                                         document.getElementsByTagName('ytd-popup-container')[0];
 
-            if (overlay) {
-                log('Return skip; autonav-endscreen is not visible.');
-                return;
-            } else
-            if (autotube.getIsAutoSkip() == true) {
-                play.click();
+        if (videoPlayer.getPlayerState() === 2 && popupEventNodename) {
+            videoPlayer.playVideo();
+            popupContainer.remove();
+            log('Popup hidden and video played again');
+        }
+    }
+
+    // if video ended ---> skip to next video
+    const skip = () => {
+        if (videoPlayer.getPlayerState() === 0 && !YTMusic) {
+            const overlay = document.querySelector('.ytp-autonav-endscreen-countdown-overlay[style="display: none;"]');
+            const overlay_v = document.getElementsByClassName('ytp-autonav-endscreen-countdown-overlay')[0];
+            const next = document.getElementsByClassName('ytp-autonav-endscreen-upnext-play-button')[0];
+            const cancel = document.getElementsByClassName('ytp-autonav-endscreen-upnext-cancel-button')[0];
+            const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]');
+
+            if (autotube.getIsAutoSkip() == true && (!overlay || autonav_off)) {
+                // videoPlayer.setAutonav(true);
+                // videoPlayer.nextVideo();
+                overlay_v.remove();
+                next.click();
                 log('Skipped to next video');
             } else
-            if (autotube.getIsAutoSkip() == false) {
-                // player().setAutonav(false);
+            if (autotube.getIsAutoSkip() == false && !overlay) {
+                // videoPlayer.setAutonav(false);
+                overlay_v.remove();
                 cancel.click();
-                document.querySelector('.ytp-autonav-endscreen-countdown-overlay').remove();
                 log('Canceled next video');
             }
         }
     }
 
     const autonav_button = () => {
-        const autonav_on = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
-                        || document.querySelector('#automix[role="button"][aria-pressed="true"]');
-        const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
-                         || document.querySelector('#automix[role="button"][aria-pressed="false"]');
+        const autonav_on = YTMusic ? document.querySelector('#automix[role="button"][aria-pressed="true"]') :
+                                     document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]');
+        const autonav_off = YTMusic ? document.querySelector('#automix[role="button"][aria-pressed="false"]') :
+                                      document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]');
 
         if (autotube.getIsAutoSkip() == true && autonav_off) {
             autonav_off.click();
@@ -68,8 +91,8 @@ let YTNonstop = (function YTNonstop(options) {
     }
 
     const autonav_button_style = () => {
-        const autonav = document.querySelector('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]')
-                     || document.querySelector('ytmusic-app .autoplay.ytmusic-tab-renderer');
+        const autonav = YTMusic ? document.getElementsByClassName('autoplay')[1] :
+                                  document.querySelector('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]');
 
         autonav.setAttribute("style", "height:0px; width:0px; opacity:0");
         log('Hide autoplay/autonav, since the button is overriden');
@@ -77,10 +100,11 @@ let YTNonstop = (function YTNonstop(options) {
 
     function run() {
         const play_button = {
-            getButton: window.document.querySelector('.ytp-play-button.ytp-button')
+            getButton: window.document.getElementsByClassName('ytp-play-button ytp-button')[0]
                     || window.document.getElementById('play-pause-button'),
             config: { attributes: true, childList: true, subtree: true },
             callback: (mutationsList, observer) => {
+                play();
                 skip();
             }
         }
@@ -108,7 +132,22 @@ let YTNonstop = (function YTNonstop(options) {
             setAutonavButton: setInterval(() => {
                 if (window.location.href.indexOf("/watch") == -1 ) return;
                 autonav_button();
-            }, 5000)
+            }, 5000),
+
+            // Autoplay Method 1: Set last time active all 20 minutes to now
+            // Autoplay Method 2: If video paused and popup visible ---> play video
+            // Autoplay Method 3: Pause and UnPause after 20 minutes
+            setOtherMethods: setInterval(() => {
+                if (window.location.href.indexOf("/watch") == -1 ) return;
+                window._lact = Date.now();
+                log('Reset last time active');
+                play();
+                // if (videoPlayer.getPlayerState() === 1) {
+                //     videoPlayer.pauseVideo();
+                //     videoPlayer.playVideo();
+                //     log('Paused and unpaused video');
+                // }
+            }, 600000)
         }
 
         return autotube;
