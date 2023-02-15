@@ -1,17 +1,10 @@
 // https://stackoverflow.com/questions/9515704/use-a-content-script-to-access-the-page-context-variables-and-functions/9517879#9517879
-var autoconfirm = document.createElement('script');
-autoconfirm.src = chrome.runtime.getURL('autoconfirm.js');
-autoconfirm.onload = function() {
+var autoconfirm_skip = document.createElement('script');
+autoconfirm_skip.src = chrome.runtime.getURL('autoconfirm&skip.js');
+autoconfirm_skip.onload = function() {
     this.remove();
 };
-(document.head || document.documentElement).appendChild(autoconfirm);
-
-var autoskip = document.createElement('script');
-autoskip.src = chrome.runtime.getURL('autoskip.js');
-autoskip.onload = function() {
-    this.remove();
-};
-(document.head || document.documentElement).appendChild(autoskip);
+(document.head || document.documentElement).appendChild(autoconfirm_skip);
 
 window.onload = (event) => {
     chrome.runtime.onMessage.addListener( (data) => {
