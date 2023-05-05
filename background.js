@@ -15,7 +15,7 @@ function ShowPopup() {
       {
         conditions: [
           new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { urlMatches: '^https:\/\/(www|music|m)\.youtube\.com' }
+            pageUrl: { urlMatches: '^https:\/\/(www|music)\.youtube\.com' }
           })
         ],
         actions: [new chrome.declarativeContent.ShowAction()]
@@ -28,8 +28,7 @@ function Reload() {
   chrome.tabs.query({
     url: [
       "https://www.youtube.com/*",
-      "https://music.youtube.com/*",
-      "https://m.youtube.com/*"
+      "https://music.youtube.com/*"
     ]
   }, (tabs) => {
     for(let tab of tabs) {
