@@ -52,11 +52,16 @@ let YTNonstop = (function YTNonstop(options) {
     // if video ended ---> skip to next video
     const skip = () => {
         if (videoPlayer.getPlayerState() === 0 && !YTMusic) {
-            const overlay = document.querySelector('.ytp-autonav-endscreen-countdown-overlay[style="display: none;"]');
-            const overlay_v = document.getElementsByClassName('ytp-autonav-endscreen-countdown-overlay')[0];
-            const next = document.getElementsByClassName('ytp-autonav-endscreen-upnext-play-button')[0];
-            const cancel = document.getElementsByClassName('ytp-autonav-endscreen-upnext-cancel-button')[0];
-            const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]');
+            const overlay = document.querySelector('.ytp-autonav-endscreen-countdown-overlay[style="display: none;"]')
+                         || document.querySelector('#player-endscreen-container[hidden]');
+            const overlay_v = document.getElementsByClassName('ytp-autonav-endscreen-countdown-overlay')[0]
+                           || document.getElementById('player-endscreen-container');
+            const next = document.getElementsByClassName('ytp-autonav-endscreen-upnext-play-button')[0]
+                      || document.getElementsByClassName('playnext-button')[0];
+            const cancel = document.getElementsByClassName('ytp-autonav-endscreen-upnext-cancel-button')[0]
+                        || document.getElementsByClassName('cancel-autoplay')[0];
+            const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
+                             || document.querySelector('ytm-autonav-toggle-button-container[aria-pressed="false"]');
 
             if (autotube.getIsAutoSkip() == true && (!overlay || autonav_off)) {
                 // videoPlayer.setAutonav(true);
@@ -75,10 +80,12 @@ let YTNonstop = (function YTNonstop(options) {
     }
 
     const autonav_button = () => {
-        const autonav_on = YTMusic ? document.querySelector('#automix[role="button"][aria-pressed="true"]') :
-                                     document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]');
-        const autonav_off = YTMusic ? document.querySelector('#automix[role="button"][aria-pressed="false"]') :
-                                      document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]');
+        const autonav_on = document.querySelector('#automix[role="button"][aria-pressed="true"]')
+                        || document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="true"]')
+                        || document.querySelector('ytm-autonav-toggle-button-container[aria-pressed="true"]');
+        const autonav_off = document.querySelector('#automix[role="button"][aria-pressed="false"]')
+                         || document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]')
+                         || document.querySelector('ytm-autonav-toggle-button-container[aria-pressed="false"]');
 
         if (autotube.getIsAutoSkip() == true && autonav_off) {
             autonav_off.click();
@@ -91,8 +98,9 @@ let YTNonstop = (function YTNonstop(options) {
     }
 
     const autonav_button_style = () => {
-        const autonav = YTMusic ? document.getElementsByClassName('autoplay')[1] :
-                                  document.querySelector('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]');
+        const autonav = document.getElementsByClassName('autoplay')[1]
+                     || document.querySelector('.ytp-button[data-tooltip-target-id="ytp-autonav-toggle-button"]')
+                     || document.querySelector('.ytm-autonav-toggle-button-container');
 
         autonav.setAttribute("style", "height:0px; width:0px; opacity:0");
         log('Hide autoplay/autonav, since the button is overriden');
@@ -101,7 +109,8 @@ let YTNonstop = (function YTNonstop(options) {
     function run() {
         const play_button = {
             getButton: window.document.getElementsByClassName('ytp-play-button ytp-button')[0]
-                    || window.document.getElementById('play-pause-button'),
+                    || window.document.getElementById('play-pause-button')
+                    || window.document.getElementsByClassName('player-control-play-pause-icon')[0],
             config: { attributes: true, childList: true, subtree: true },
             callback: (mutationsList, observer) => {
                 play();
