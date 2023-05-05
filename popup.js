@@ -33,7 +33,8 @@ function setAutoTubeListeners(key) {
     chrome.tabs.query({
       url: [
         "https://www.youtube.com/*",
-        "https://music.youtube.com/*"
+        "https://music.youtube.com/*",
+        "https://m.youtube.com/*"
       ]
     },
     (tabs) => {
