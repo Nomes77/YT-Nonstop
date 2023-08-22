@@ -26,6 +26,8 @@ let YTNonstop = (function YTNonstop(options) {
     }
     const YTMusic = window.location.hostname === 'music.youtube.com';
     const videoPlayer = document.getElementById('movie_player');
+    const miniPlayer = YTMusic ? document.querySelector('ytmusic-player-bar:not([player-page-open_])') : 
+                                 document.querySelector('ytd-app[miniplayer-is-active]');
 
     function getTimestamp() {
         return new Date().toLocaleTimeString();
@@ -113,7 +115,7 @@ let YTNonstop = (function YTNonstop(options) {
 
         const loadSettings = {
             setSettings: setInterval(() => {
-                if (window.location.href.indexOf("/watch") == -1 ) return;
+                if (window.location.href.indexOf("/watch") == -1 | !miniPlayer) return;
 
                 // set play button observer
                 try {
@@ -132,7 +134,7 @@ let YTNonstop = (function YTNonstop(options) {
             }, 1000),
 
             setAutonavButton: setInterval(() => {
-                if (window.location.href.indexOf("/watch") == -1 ) return;
+                if (window.location.href.indexOf("/watch") == -1 | !miniPlayer) return;
                 autonav_button();
             }, 5000),
 
@@ -140,7 +142,7 @@ let YTNonstop = (function YTNonstop(options) {
             // Autoplay Method 2: If video paused and popup visible ---> play video
             // Autoplay Method 3: Pause and UnPause after 20 minutes
             setOtherMethods: setInterval(() => {
-                if (window.location.href.indexOf("/watch") == -1 ) return;
+                if (window.location.href.indexOf("/watch") == -1 | !miniPlayer) return;
                 window._lact = Date.now();
                 log('Reset last time active');
                 play();
