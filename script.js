@@ -46,7 +46,7 @@ let YTNonstop = (function YTNonstop(options) {
 
         if (videoPlayer.getPlayerState() === 2 && popupEventNodename && rightPopup) {
             videoPlayer.playVideo();
-            popupContainer.remove();
+            popupContainer.handleClosePopupAction_();
             log('Popup hidden and video played again');
         }
     }
