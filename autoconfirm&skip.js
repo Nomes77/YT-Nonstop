@@ -1,4 +1,9 @@
 function injectScript(YTNonstop, tag) {
+    policyDefault = trustedTypes.createPolicy('default', {
+        createHTML: string => string,
+        createScript: string => string
+    });
+
     var node = document.getElementsByTagName(tag)[0];
     var init_inject_script = document.createElement('script');
     var run_inject_script = document.createElement('script');
@@ -6,10 +11,12 @@ function injectScript(YTNonstop, tag) {
     init_inject_script.setAttribute('type', 'text/javascript');
     run_inject_script.setAttribute('type', 'text/javascript');
 
-    init_inject_script.append(`YTNonstop = ${YTNonstop}()`);
+    const init_script = `YTNonstop = ${YTNonstop}()`;
+    init_inject_script.append(init_script);
     node.appendChild(init_inject_script);
 
-    run_inject_script.append("autotube = YTNonstop = new YTNonstop();");
+    const run_script = "autotube = YTNonstop = new YTNonstop();";
+    run_inject_script.append(run_script);
     node.appendChild(run_inject_script);
 
     init_inject_script.remove();
@@ -26,8 +33,6 @@ let YTNonstop = (function YTNonstop(options) {
     }
     const YTMusic = window.location.hostname === 'music.youtube.com';
     const videoPlayer = document.getElementById('movie_player');
-    const miniPlayer = YTMusic ? document.querySelector('ytmusic-player-bar:not([player-page-open_])') : 
-                                 document.querySelector('ytd-app[miniplayer-is-active]');
 
     function getTimestamp() {
         return new Date().toLocaleTimeString();
@@ -115,7 +120,7 @@ let YTNonstop = (function YTNonstop(options) {
 
         const loadSettings = {
             setSettings: setInterval(() => {
-                if (window.location.href.indexOf("/watch") == -1 | !miniPlayer) return;
+                if (window.location.href.indexOf("/watch") == -1) return;
 
                 // set play button observer
                 try {
@@ -134,7 +139,13 @@ let YTNonstop = (function YTNonstop(options) {
             }, 1000),
 
             setAutonavButton: setInterval(() => {
-                if (window.location.href.indexOf("/watch") == -1 | !miniPlayer) return;
+                if (window.location.href.indexOf("/watch") == -1) {
+                    if (document.querySelector('ytd-app[miniplayer-is-active]') || document.querySelector('ytmusic-player-bar:not([player-page-open_])')) {
+                        autonav_button();
+                    } else {
+                        return;
+                    }
+                }
                 autonav_button();
             }, 5000),
 
@@ -142,15 +153,18 @@ let YTNonstop = (function YTNonstop(options) {
             // Autoplay Method 2: If video paused and popup visible ---> play video
             // Autoplay Method 3: Pause and UnPause after 20 minutes
             setOtherMethods: setInterval(() => {
-                if (window.location.href.indexOf("/watch") == -1 | !miniPlayer) return;
+                if (window.location.href.indexOf("/watch") == -1) {
+                    if (document.querySelector('ytd-app[miniplayer-is-active]') || document.querySelector('ytmusic-player-bar:not([player-page-open_])')) {
+                        window._lact = Date.now();
+                        log('Reset last time active');
+                        play();
+                    } else {
+                        return;
+                    }
+                }
                 window._lact = Date.now();
                 log('Reset last time active');
                 play();
-                // if (videoPlayer.getPlayerState() === 1) {
-                //     videoPlayer.pauseVideo();
-                //     videoPlayer.playVideo();
-                //     log('Paused and unpaused video');
-                // }
             }, 600000)
         }
 
