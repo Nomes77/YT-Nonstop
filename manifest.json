@@ -1,6 +1,6 @@
 {
   "name": "YT-Nonstop",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Deletes the annoying \"Video paused. Continue watching?\" popup on YouTube and keeps it running nonstop without autoplay message!",
   "permissions": [ "declarativeContent", "storage", "tabs" ],
   "host_permissions": [ "https://www.youtube.com/*", "https://music.youtube.com/*" ],
