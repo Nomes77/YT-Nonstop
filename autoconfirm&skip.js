@@ -42,9 +42,9 @@ let YTNonstop = (function YTNonstop(options) {
         const popupContainer = YTMusic ? document.getElementsByTagName('ytmusic-popup-container')[0] :
                                          document.getElementsByTagName('ytd-popup-container')[0];
         // Make sure that the right popup is shown
-        const rightPopup = document.querySelector('ytd-app:not([miniplayer-is-active]) YT-CONFIRM-DIALOG-RENDERER #cancel-button[hidden]');
+        const wrongPopup = document.querySelector('YT-CONFIRM-DIALOG-RENDERER #cancel-button:not([hidden])');
 
-        if (videoPlayer.getPlayerState() === 2 && popupEventNodename && rightPopup) {
+        if (videoPlayer.getPlayerState() === 2 && popupEventNodename && !wrongPopup) {
             videoPlayer.playVideo();
             popupContainer.handleClosePopupAction_();
             log('Popup hidden and video played again');
