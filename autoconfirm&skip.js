@@ -32,8 +32,9 @@ let YTNonstop = (function YTNonstop(options) {
          setAutoSkip: function(value) { return autotube._autoSkip = value},
     }
     const YTMusic = window.location.hostname === 'music.youtube.com';
-    const videoPlayer = YTMusic ? document.getElementById('player') :
-                                  document.getElementById('movie_player');
+    const videoPlayer = {
+        player: () => document.getElementById('movie_player'),
+    };
 
     function getTimestamp() {
         return new Date().toLocaleTimeString();
@@ -52,8 +53,8 @@ let YTNonstop = (function YTNonstop(options) {
         // Make sure that the right popup is shown
         const wrongPopup = document.querySelector('YT-CONFIRM-DIALOG-RENDERER #cancel-button:not([hidden])');
 
-        if (videoPlayer.getPlayerState() === 2 && popupEventNodename && !wrongPopup) {
-            videoPlayer.playVideo();
+        if (videoPlayer.player().getPlayerState() === 2 && popupEventNodename && !wrongPopup) {
+            videoPlayer.player().playVideo();
             popupContainer.handleClosePopupAction_();
             log('Popup hidden and video played again');
         }
@@ -69,8 +70,8 @@ let YTNonstop = (function YTNonstop(options) {
             const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]');
 
             if (autotube.getIsAutoSkip() == true && (!overlay || autonav_off)) {
-                // videoPlayer.setAutonav(true);
-                // videoPlayer.nextVideo();
+                // videoPlayer.player().setAutonav(true);
+                // videoPlayer.player().nextVideo();
                 overlay_v.remove();
                 next.click();
                 log('Skipped to next video');
