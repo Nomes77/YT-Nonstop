@@ -25,8 +25,9 @@ let YTNonstop = (function YTNonstop(options) {
          setAutoSkip: function(value) { return autotube._autoSkip = value},
     }
     const YTMusic = window.location.hostname === 'music.youtube.com';
-    const videoPlayer = YTMusic ? document.getElementById('player') :
-                                  document.getElementById('movie_player');
+    const videoPlayer = {
+        player: () => document.getElementById('movie_player'),
+    };
 
     function getTimestamp() {
         return new Date().toLocaleTimeString();
@@ -45,8 +46,8 @@ let YTNonstop = (function YTNonstop(options) {
         // Make sure that the right popup is shown
         const wrongPopup = document.querySelector('YT-CONFIRM-DIALOG-RENDERER #cancel-button:not([hidden])');
 
-        if (videoPlayer.getPlayerState() === 2 && popupEventNodename && !wrongPopup) {
-            videoPlayer.playVideo();
+        if (videoPlayer.player().getPlayerState() === 2 && popupEventNodename && !wrongPopup) {
+            videoPlayer.player().playVideo();
             popupContainer.handleClosePopupAction_();
             log('Popup hidden and video played again');
         }
@@ -54,7 +55,7 @@ let YTNonstop = (function YTNonstop(options) {
 
     // if video ended ---> skip to next video
     const skip = () => {
-        if (videoPlayer.getPlayerState() === 0 && !YTMusic) {
+        if (videoPlayer.player().getPlayerState() === 0 && !YTMusic) {
             const overlay = document.querySelector('.ytp-autonav-endscreen-countdown-overlay[style="display: none;"]');
             const overlay_v = document.getElementsByClassName('ytp-autonav-endscreen-countdown-overlay')[0];
             const next = document.getElementsByClassName('ytp-autonav-endscreen-upnext-play-button')[0];
@@ -69,7 +70,7 @@ let YTNonstop = (function YTNonstop(options) {
                 log('Skipped to next video');
             } else
             if (autotube.getIsAutoSkip() == false && !overlay) {
-                // videoPlayer.setAutonav(false);
+                // videoPlayer.player().setAutonav(false);
                 overlay_v.remove();
                 cancel.click();
                 log('Canceled next video');
