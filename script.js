@@ -25,7 +25,8 @@ let YTNonstop = (function YTNonstop(options) {
          setAutoSkip: function(value) { return autotube._autoSkip = value},
     }
     const YTMusic = window.location.hostname === 'music.youtube.com';
-    const videoPlayer = document.getElementById('movie_player');
+    const videoPlayer = YTMusic ? document.getElementById('player') :
+                                  document.getElementById('movie_player');
 
     function getTimestamp() {
         return new Date().toLocaleTimeString();
