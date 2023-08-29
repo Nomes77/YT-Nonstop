@@ -63,8 +63,8 @@ let YTNonstop = (function YTNonstop(options) {
             const autonav_off = document.querySelector('.ytp-autonav-toggle-button-container > .ytp-autonav-toggle-button[aria-checked="false"]');
 
             if (autotube.getIsAutoSkip() == true && (!overlay || autonav_off)) {
-                // videoPlayer.setAutonav(true);
-                // videoPlayer.nextVideo();
+                // videoPlayer.player().setAutonav(true);
+                // videoPlayer.player().nextVideo();
                 overlay_v.remove();
                 next.click();
                 log('Skipped to next video');
